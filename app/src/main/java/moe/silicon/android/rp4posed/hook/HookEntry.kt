@@ -3,6 +3,7 @@ package moe.silicon.android.rp4posed.hook
 import android.app.AndroidAppHelper
 import android.content.ComponentName
 import android.content.Intent
+import android.os.UserHandle
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
@@ -11,7 +12,9 @@ import com.highcapable.yukihookapi.hook.factory.configs
 import com.highcapable.yukihookapi.hook.factory.encase
 import com.highcapable.yukihookapi.hook.factory.field
 import com.highcapable.yukihookapi.hook.type.android.BundleClass
+import com.highcapable.yukihookapi.hook.type.android.ContextClass
 import com.highcapable.yukihookapi.hook.type.android.ViewClass
+import com.highcapable.yukihookapi.hook.type.java.StringClass
 import com.highcapable.yukihookapi.hook.xposed.proxy.IYukiHookXposedInit
 
 const val TAG = "RP4PosedHookEntry"
@@ -72,6 +75,27 @@ class HookEntry : IYukiHookXposedInit {
                         val settingsButton: ImageButton = view.findViewById(ridiSettingsButton)
                         val brightnessButton: ImageButton = view.findViewById(ridiBrightnessButton)
 
+                        // Get isForegroundApp
+                        val isForegroundApp = "com.android.systemui.bubbles.BubbleController".toClass().getMethod("isForegroundApp", ContextClass, StringClass);
+                        val userHandleAll = "android.os.UserHandle".toClass().field {
+                            name = "ALL"
+                        }.get().any() as UserHandle;
+
+                        val checkRidiFg = fun (): Boolean {
+                            return isForegroundApp.invoke(null, appContext, "com.ridi.paper") as Boolean
+                        }
+                        val launchRidi = fun () {
+                            val intent = Intent();
+                            intent.component = ComponentName(
+                                "com.ridi.paper",
+                                "com.ridi.books.viewer.main.activity.MainActivityPaper"
+                            )
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            AndroidAppHelper.currentApplication().startActivity(intent)
+                            // Wait for Ridi launch. Ugly. TODO: FIXME.
+                            Thread.sleep(50)
+                        }
+
                         homeButton.setOnClickListener {
                             Log.d(TAG, "Home button clicked!!!!")
 
@@ -82,6 +106,24 @@ class HookEntry : IYukiHookXposedInit {
                             )
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                             AndroidAppHelper.currentApplication().startActivity(intent)
+                        }
+
+                        settingsButton.setOnClickListener {
+                            if (!checkRidiFg()) {
+                                Log.d(TAG, "RIDI is not running. Launching...")
+                                launchRidi()
+                            }
+                            val settingsIntent = Intent("com.ridi.paper.ACTION.SHOW_SETTINGS")
+                            appContext?.sendBroadcastAsUser(settingsIntent, userHandleAll)
+                        }
+
+                        brightnessButton.setOnClickListener {
+                            if (!checkRidiFg()) {
+                                Log.d(TAG, "RIDI is not running. Launching...")
+                                launchRidi()
+                            }
+                            val brightnessIntent = Intent("com.ridi.paper.ACTION.SHOW_BRIGHTNESS")
+                            appContext?.sendBroadcastAsUser(brightnessIntent, userHandleAll)
                         }
                     }
                 }

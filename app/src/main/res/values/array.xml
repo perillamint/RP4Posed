@@ -2,6 +2,7 @@
 <resources>
     <string-array name="module_scope">
         <item>android</item>
+        <item>com.android.systemui</item>
         <item>com.eroum.service.RIDI</item>
     </string-array>
 </resources>

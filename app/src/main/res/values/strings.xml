@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">RP4Posed</string>
     <string name="xposed_desc">Xposed enhancements for RIDI Paper 4</string>
+    <string name="flare">Trans Rights are Human Rights!</string>
     <string name="about_module">This module is made by YukiHookAPI. \nLearn more https://github.com/fankes/YukiHookAPI</string>
+    <string name="system_framework">System framework</string>
+    <string name="hijack_home">Hijack home button</string>
+    <string name="spoof_eng">Spoof engineering build to enable ADB</string>
+    <string name="ridi_device_manager">RIDIDeviceManager</string>
     <string name="module_version">Module version: %1$s</string>
     <string name="module_not_activated">Module not activated</string>
     <string name="module_is_activated">Module is activated</string>

@@ -1,10 +1,13 @@
 package moe.silicon.android.rp4posed.hook
 
 import android.app.AndroidAppHelper
+import android.app.Instrumentation
 import android.content.ComponentName
 import android.content.Intent
 import android.os.UserHandle
 import android.util.Log
+import android.view.KeyEvent.KEYCODE_BACK
+import android.view.KeyEvent.KEYCODE_F1
 import android.view.View
 import android.widget.ImageButton
 import com.highcapable.yukihookapi.annotation.xposed.InjectYukiHookWithXposed
@@ -16,6 +19,7 @@ import com.highcapable.yukihookapi.hook.type.android.ContextClass
 import com.highcapable.yukihookapi.hook.type.android.ViewClass
 import com.highcapable.yukihookapi.hook.type.java.StringClass
 import com.highcapable.yukihookapi.hook.xposed.proxy.IYukiHookXposedInit
+
 
 const val TAG = "RP4PosedHookEntry"
 
@@ -30,6 +34,35 @@ class HookEntry : IYukiHookXposedInit {
         // Your code here.
         loadSystem {
             Log.d(TAG, "Got in to the system framework!")
+            "com.android.server.policy.PhoneWindowManager".toClass().hook {
+                injectMember {
+                    method {
+                        name = "sendBroadcastForRP400"
+                        //param(IntClass, BooleanClass, BooleanClass)
+                    }
+                    beforeHook {
+                        val keycode = args[0] as Int
+                        val isButtonDown = args[1] as Boolean
+                        val isLongpress = args[2] as Boolean
+
+                        if (keycode == KEYCODE_F1 && !isButtonDown && !isLongpress) {
+                            Log.d(TAG, "Shortpress button up detected.")
+                            result = null; // Cancel the method execution after the hook.
+
+                            object : Thread() {
+                                override fun run() {
+                                    try {
+                                        val inst = Instrumentation()
+                                        inst.sendKeyDownUpSync(KEYCODE_BACK)
+                                    } catch (e: Exception) {
+                                        Log.e(TAG, "Exception when sendKeyDownUpSync: ${e.toString()}")
+                                    }
+                                }
+                            }.start()
+                        }
+                    }
+                }
+            }
         }
 
         // SystemUI customization.

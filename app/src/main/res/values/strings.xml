@@ -3,13 +3,13 @@
     <string name="xposed_desc">Xposed enhancements for RIDI Paper 4</string>
     <string name="flare">Trans Rights are Human Rights!</string>
     <string name="about_module">This module is made by YukiHookAPI. \nLearn more https://github.com/fankes/YukiHookAPI</string>
-    <string name="system_framework">System framework</string>
-    <string name="hijack_home">Hijack home button</string>
+    <string name="system_ui">System UI</string>
+    <string name="hijack_button">Hijack Status bar button</string>
     <string name="spoof_eng">Spoof engineering build to enable ADB</string>
     <string name="ridi_device_manager">RIDIDeviceManager</string>
     <string name="module_version">Module version: %1$s</string>
-    <string name="module_not_activated">Module not activated</string>
-    <string name="module_is_activated">Module is activated</string>
+    <string name="module_not_activated">Module not activated (Touch here to launch LSPosed Manager)</string>
+    <string name="module_is_activated">Module is activated (Touch here to launch LSPosed Manager)</string>
     <string name="display_settings">Display settings</string>
     <string name="hide_app_icon_on_launcher">Hide app icons on launcher</string>
     <string name="hide_app_icon_on_launcher_tip">After hiding the app icon, the interface may be closed and will no longer be displayed on the launcher. You can find and open the module settings in EdXposed or LSPosed.</string>

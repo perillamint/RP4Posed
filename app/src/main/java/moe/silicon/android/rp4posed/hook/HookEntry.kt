@@ -78,20 +78,29 @@ class HookEntry : IYukiHookXposedInit {
                 name = "ridi_status_bar_button_brightness"
             }.get().int()
 
-            "android.view.View".toClass().hook {
+            "com.android.systemui.statusbar.ridi.RidiStatusBarFragment".toClass().hook {
+                // Force enable buttons
                 injectMember {
                     method {
-                        name = "setOnClickListener"
+                        name = "updateSetupcomplete"
                     }
-                    beforeHook {
-                        val view: View = instance as View;
+                    afterHook {
+                        val homeButton = this.field {
+                            name = "mImageButtonHome"
+                        }.get().any() as ImageButton
+                        val backButton = this.field {
+                            name = "mImageButtonBack"
+                        }.get().any() as ImageButton
+                        val settingsButton = this.field {
+                            name = "mImageButtonSettings"
+                        }.get().any() as ImageButton
 
-                        Log.d(TAG, "setOnClickListener called " + Integer.toHexString(view.id))
+                        homeButton.isEnabled = true
+                        backButton.isEnabled = true
+                        settingsButton.isEnabled = true
                     }
                 }
-            }
 
-            "com.android.systemui.statusbar.ridi.RidiStatusBarFragment".toClass().hook {
                 injectMember {
                     method {
                         name = "onViewCreated"

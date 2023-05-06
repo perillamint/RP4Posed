@@ -2,9 +2,7 @@
 
 package moe.silicon.android.rp4posed.ui.activity
 
-import android.content.ComponentName
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.util.Log
 import androidx.core.view.isVisible
@@ -30,6 +28,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         binding.hijackButton.isChecked = true
         binding.hijackButton.isEnabled = false
+
+        binding.enableAdbwireless.setOnClickListener {
+            Log.d(TAG, "Configure adb wireless")
+
+            if (binding.enableAdbwireless.isChecked) {
+                Runtime.getRuntime().exec(arrayOf("su", "-c", "setprop sys.usb.config none; setprop service.adb.tcp.port 5555; setprop sys.usb.config mtp,adb"))
+            } else {
+                Runtime.getRuntime().exec(arrayOf("su", "-c", "setprop sys.usb.config none; setprop service.adb.tcp.port -1; setprop sys.usb.config mtp,adb"))
+            }
+        }
         // Your code here.
     }
 

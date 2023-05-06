@@ -3,13 +3,13 @@
 <string name="app_name">RP4Posed</string>
 <string name="xposed_desc">리디 페이퍼4 용 Xposed 향상 모듈</string>
 <string name="flare">트랜스 권리는 인권입니다!</string>
-<string name="about_module">이 모듈은 GPL v3 하에 릴리즈 되었으며, 다음 링크에서 소스 코드를 받을 수 있습니다.\n더 알아보기: https://github.com/perillamint/RP4Posed</string>
+<string name="about_module">이 모듈은 GPL v3 하에 릴리즈 되었으며, 다음 링크에서 소스 코드를 받을 수 있습니다.\nhttps://github.com/perillamint/RP4Posed</string>
 <string name="about_yukihook">이 모듈은 YukiHookAPI를 사용해 만들어졌습니다. \n더 알아보기: https://github.com/fankes/YukiHookAPI</string>
 <string name="system_ui">시스템UI</string>
 <string name="hijack_button">상태바 버튼 가로채기</string>
 <string name="spoof_eng">엔지니어링 빌드 스푸핑 (ADB  활성화)</string>
 <string name="ridi_device_manager">리디 장치 관리자 (RIDIDeviceManager)</string>
-<string name="module_version">Module version: %1$s</string>
+<string name="module_version">모듈 버전: %1$s</string>
 <string name="module_not_activated">모듈 활성화 되지 않음 (여기를 눌러 LSPosed 매니저 실행)</string>
 <string name="module_is_activated">모듈 활성화됨 (여기를 눌러 LSPosed 매니저 실행)</string>
 <string name="adb_wireless">무선 ADB</string>

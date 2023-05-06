@@ -2,7 +2,8 @@
     <string name="app_name">RP4Posed</string>
     <string name="xposed_desc">Xposed enhancements for RIDI Paper 4</string>
     <string name="flare">Trans Rights are Human Rights!</string>
-    <string name="about_module">This module is made by YukiHookAPI. \nLearn more https://github.com/fankes/YukiHookAPI</string>
+    <string name="about_module">This module is released under GPL v3 and you can get source code at the following link:\nhttps://github.com/perillamint/RP4Posed</string>
+    <string name="about_yukihook">This module is made by YukiHookAPI. \nLearn more https://github.com/fankes/YukiHookAPI</string>
     <string name="system_ui">System UI</string>
     <string name="hijack_button">Hijack Status bar button</string>
     <string name="spoof_eng">Spoof engineering build to enable ADB</string>
@@ -10,8 +11,7 @@
     <string name="module_version">Module version: %1$s</string>
     <string name="module_not_activated">Module not activated (Touch here to launch LSPosed Manager)</string>
     <string name="module_is_activated">Module is activated (Touch here to launch LSPosed Manager)</string>
-    <string name="display_settings">Display settings</string>
-    <string name="hide_app_icon_on_launcher">Hide app icons on launcher</string>
-    <string name="hide_app_icon_on_launcher_tip">After hiding the app icon, the interface may be closed and will no longer be displayed on the launcher. You can find and open the module settings in EdXposed or LSPosed.</string>
-    <string name="hide_app_icon_on_launcher_notice">Note: Be sure to turn off the \"Force apps to show launcher icons\" feature in LSPosed</string>
+    <string name="adb_wireless">ADB Wireless</string>
+    <string name="enable_wireless_adb">Enable wireless ADB connection</string>
+    <string name="wireless_adb_warning">Warning: This will allow anyone in your local network can connect to your RP4!</string>
 </resources>

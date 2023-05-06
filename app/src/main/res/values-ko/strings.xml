@@ -2,17 +2,17 @@
 <resources>
 <string name="app_name">RP4Posed</string>
 <string name="xposed_desc">리디 페이퍼4 용 Xposed 향상 모듈</string>
-<string name="flare">Trans Rights are Human Rights!</string>
-<string name="about_module">This module is made by YukiHookAPI. \nLearn more https://github.com/fankes/YukiHookAPI</string>
+<string name="flare">트랜스 권리는 인권입니다!</string>
+<string name="about_module">이 모듈은 GPL v3 하에 릴리즈 되었으며, 다음 링크에서 소스 코드를 받을 수 있습니다.\n더 알아보기: https://github.com/perillamint/RP4Posed</string>
+<string name="about_yukihook">이 모듈은 YukiHookAPI를 사용해 만들어졌습니다. \n더 알아보기: https://github.com/fankes/YukiHookAPI</string>
 <string name="system_ui">시스템UI</string>
 <string name="hijack_button">상태바 버튼 가로채기</string>
 <string name="spoof_eng">엔지니어링 빌드 스푸핑 (ADB  활성화)</string>
-<string name="ridi_device_manager">RIDI 디바이스 매니저 (RIDIDeviceManager)</string>
+<string name="ridi_device_manager">리디 장치 관리자 (RIDIDeviceManager)</string>
 <string name="module_version">Module version: %1$s</string>
 <string name="module_not_activated">모듈 활성화 되지 않음 (여기를 눌러 LSPosed 매니저 실행)</string>
 <string name="module_is_activated">모듈 활성화됨 (여기를 눌러 LSPosed 매니저 실행)</string>
-<string name="display_settings">Display settings</string>
-<string name="hide_app_icon_on_launcher">Hide app icons on launcher</string>
-<string name="hide_app_icon_on_launcher_tip">After hiding the app icon, the interface may be closed and will no longer be displayed on the launcher. You can find and open the module settings in EdXposed or LSPosed.</string>
-<string name="hide_app_icon_on_launcher_notice">Note: Be sure to turn off the \"Force apps to show launcher icons\" feature in LSPosed</string>
+<string name="adb_wireless">무선 ADB</string>
+<string name="enable_wireless_adb">무선 ADB 연결 활성화</string>
+<string name="wireless_adb_warning">경고: 이 기능은 로컬 네트워크에 있는 아무나 이 기기에 접속할 수 있도록 허용합니다.</string>
 </resources>

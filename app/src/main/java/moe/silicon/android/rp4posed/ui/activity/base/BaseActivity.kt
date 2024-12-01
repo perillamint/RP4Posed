@@ -1,17 +1,12 @@
-@file:Suppress("MemberVisibilityCanBePrivate", "UNCHECKED_CAST")
-
 package moe.silicon.android.rp4posed.ui.activity.base
 
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.WindowCompat
 import androidx.viewbinding.ViewBinding
 import com.highcapable.yukihookapi.hook.factory.current
 import com.highcapable.yukihookapi.hook.factory.method
 import com.highcapable.yukihookapi.hook.type.android.LayoutInflaterClass
-import moe.silicon.android.rp4posed.R
 import moe.silicon.android.rp4posed.utils.factory.isNotSystemInDarkMode
 
 abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
@@ -42,11 +37,6 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         WindowCompat.getInsetsController(window, window.decorView).apply {
             isAppearanceLightStatusBars = isNotSystemInDarkMode
             isAppearanceLightNavigationBars = isNotSystemInDarkMode
-        }
-        ResourcesCompat.getColor(resources, R.color.colorThemeBackground, null).also {
-            window?.statusBarColor = it
-            window?.navigationBarColor = it
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) window?.navigationBarDividerColor = it
         }
         /**
          * Init children

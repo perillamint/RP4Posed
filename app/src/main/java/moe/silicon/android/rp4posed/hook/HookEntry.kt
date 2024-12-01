@@ -14,6 +14,7 @@ import com.highcapable.yukihookapi.annotation.xposed.InjectYukiHookWithXposed
 import com.highcapable.yukihookapi.hook.factory.configs
 import com.highcapable.yukihookapi.hook.factory.encase
 import com.highcapable.yukihookapi.hook.factory.field
+import com.highcapable.yukihookapi.hook.factory.method
 import com.highcapable.yukihookapi.hook.type.android.BundleClass
 import com.highcapable.yukihookapi.hook.type.android.ContextClass
 import com.highcapable.yukihookapi.hook.type.android.ViewClass
@@ -34,13 +35,12 @@ class HookEntry : IYukiHookXposedInit {
         // Your code here.
         loadSystem {
             Log.d(TAG, "Got in to the system framework!")
-            "com.android.server.policy.PhoneWindowManager".toClass().hook {
-                injectMember {
-                    method {
-                        name = "sendBroadcastForRP400"
-                        //param(IntClass, BooleanClass, BooleanClass)
-                    }
-                    beforeHook {
+            "com.android.server.policy.PhoneWindowManager".toClass().apply {
+                method {
+                    name = "sendBroadcastForRP400"
+                    //param(IntClass, BooleanClass, BooleanClass)
+                }.hook {
+                    before {
                         val keycode = args[0] as Int
                         val isButtonDown = args[1] as Boolean
                         val isLongpress = args[2] as Boolean
@@ -78,13 +78,11 @@ class HookEntry : IYukiHookXposedInit {
                 name = "ridi_status_bar_button_brightness"
             }.get().int()
 
-            "com.android.systemui.statusbar.ridi.RidiStatusBarFragment".toClass().hook {
-                // Force enable buttons
-                injectMember {
-                    method {
-                        name = "updateSetupcomplete"
-                    }
-                    afterHook {
+            "com.android.systemui.statusbar.ridi.RidiStatusBarFragment".toClass().apply {
+                method {
+                    name = "updateSetupcomplete"
+                }.hook {
+                    after {
                         val homeButton = this.instanceClass!!.field {
                             name = "mImageButtonHome"
                         }.get().any() as ImageButton
@@ -101,15 +99,15 @@ class HookEntry : IYukiHookXposedInit {
                     }
                 }
 
-                injectMember {
-                    method {
-                        name = "onViewCreated"
-                        param(ViewClass, BundleClass)
-                    }
-                    beforeHook {
+                method {
+                    name = "onViewCreated"
+                    param(ViewClass, BundleClass)
+                }.hook {
+                    before {
                         Log.d(TAG, "Entering onViewCreated")
                     }
-                    afterHook {
+
+                    after {
                         Log.d(TAG, "onViewCreated executed.")
                         val view: View = args[0] as View
 
@@ -177,6 +175,7 @@ class HookEntry : IYukiHookXposedInit {
 
             // RIDI Device Manager enables ADB in engineering build...
             // so fake it to enable ADB.
+            Log.d(TAG, "Setting build type to eng")
             "android.os.Build".toClass().field {
                 name = "TYPE"
             }.get().set("eng")

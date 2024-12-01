@@ -85,13 +85,13 @@ class HookEntry : IYukiHookXposedInit {
                         name = "updateSetupcomplete"
                     }
                     afterHook {
-                        val homeButton = this.field {
+                        val homeButton = this.instanceClass!!.field {
                             name = "mImageButtonHome"
                         }.get().any() as ImageButton
-                        val backButton = this.field {
+                        val backButton = this.instanceClass!!.field {
                             name = "mImageButtonBack"
                         }.get().any() as ImageButton
-                        val settingsButton = this.field {
+                        val settingsButton = this.instanceClass!!.field {
                             name = "mImageButtonSettings"
                         }.get().any() as ImageButton
 

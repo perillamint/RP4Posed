@@ -1,16 +1,16 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'com.google.devtools.ksp' version '1.8.20-1.0.10'
+    id 'com.google.devtools.ksp' version '2.1.0-1.0.29'
 }
 
 android {
-    compileSdk 33
+    compileSdk 35
 
     defaultConfig {
         applicationId "moe.silicon.android.rp4posed"
         minSdk 29
-        targetSdk 33
+        targetSdk 35
         versionCode rootProject.ext.appVersionCode
         versionName rootProject.ext.appVersionName
 
@@ -21,16 +21,15 @@ android {
         release {
             minifyEnabled rootProject.ext.enableR8
             shrinkResources rootProject.ext.enableR8
-            zipAlignEnabled rootProject.ext.enableR8
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = '21'
         freeCompilerArgs = [
                 '-Xno-param-assertions',
                 '-Xno-call-assertions',
@@ -39,23 +38,24 @@ android {
     }
     buildFeatures {
         viewBinding true
-    }
-    lintOptions {
-        checkReleaseBuilds false
+        buildConfig true
     }
     namespace 'moe.silicon.android.rp4posed'
+    lint {
+        checkReleaseBuilds false
+    }
 }
 
 dependencies {
     compileOnly 'de.robv.android.xposed:api:82'
-    implementation 'com.highcapable.yukihookapi:api:1.1.9'
-    ksp 'com.highcapable.yukihookapi:ksp-xposed:1.1.9'
+    implementation 'com.highcapable.yukihookapi:api:1.2.1'
+    ksp 'com.highcapable.yukihookapi:ksp-xposed:1.2.1'
     implementation 'com.github.duanhong169:drawabletoolbox:1.0.7'
-    implementation 'androidx.core:core-ktx:1.10.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.core:core-ktx:1.15.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 }

@@ -2,8 +2,6 @@
 
 package moe.silicon.android.rp4posed.ui.activity
 
-import android.content.Intent
-import android.net.Uri
 import android.util.Log
 import androidx.core.view.isVisible
 import com.highcapable.yukihookapi.YukiHookAPI
@@ -21,9 +19,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         binding.mainTextVersion.text = getString(R.string.module_version, BuildConfig.VERSION_NAME)
 
         binding.mainLinStatus.setOnClickListener {
-            Log.d(TAG, "Broadcasting LSPosed magic secret code!")
-            var intent = Intent("android.provider.Telephony.SECRET_CODE", Uri.parse("android_secret_code://5776733"))
-            sendBroadcast(intent)
+            Log.d(TAG, "Launching LSPosed LAUNCH_MANAGER")
+            Runtime.getRuntime().exec(arrayOf("su", "-c", "am", "start", "-c", "org.lsposed.manager.LAUNCH_MANAGER", "com.android.shell/.BugreportWarningActivity"))
         }
 
         binding.hijackButton.isChecked = true

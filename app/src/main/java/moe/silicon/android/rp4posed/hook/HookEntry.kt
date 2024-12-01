@@ -47,7 +47,7 @@ class HookEntry : IYukiHookXposedInit {
 
                         if (keycode == KEYCODE_F1 && !isButtonDown && !isLongpress) {
                             Log.d(TAG, "Shortpress button up detected.")
-                            result = null; // Cancel the method execution after the hook.
+                            result = null // Cancel the method execution after the hook.
 
                             object : Thread() {
                                 override fun run() {
@@ -55,7 +55,7 @@ class HookEntry : IYukiHookXposedInit {
                                         val inst = Instrumentation()
                                         inst.sendKeyDownUpSync(KEYCODE_BACK)
                                     } catch (e: Exception) {
-                                        Log.e(TAG, "Exception when sendKeyDownUpSync: ${e.toString()}")
+                                        Log.e(TAG, "Exception when sendKeyDownUpSync: $e")
                                     }
                                 }
                             }.start()
@@ -67,7 +67,7 @@ class HookEntry : IYukiHookXposedInit {
 
         // SystemUI customization.
         loadApp("com.android.systemui") {
-            Log.d(TAG, "Running in SystemUI");
+            Log.d(TAG, "Running in SystemUI")
             val ridiHomeButton = "com.android.systemui.R\$id".toClass().field {
                 name = "ridi_status_bar_button_home"
             }.get().int()
@@ -116,16 +116,16 @@ class HookEntry : IYukiHookXposedInit {
                         val brightnessButton: ImageButton = view.findViewById(ridiBrightnessButton)
 
                         // Get isForegroundApp
-                        val isForegroundApp = "com.android.systemui.bubbles.BubbleController".toClass().getMethod("isForegroundApp", ContextClass, StringClass);
+                        val isForegroundApp = "com.android.systemui.bubbles.BubbleController".toClass().getMethod("isForegroundApp", ContextClass, StringClass)
                         val userHandleAll = "android.os.UserHandle".toClass().field {
                             name = "ALL"
-                        }.get().any() as UserHandle;
+                        }.get().any() as UserHandle
 
                         val checkRidiFg = fun (): Boolean {
                             return isForegroundApp.invoke(null, appContext, "com.ridi.paper") as Boolean
                         }
                         val launchRidi = fun () {
-                            val intent = Intent();
+                            val intent = Intent()
                             intent.component = ComponentName(
                                 "com.ridi.paper",
                                 "com.ridi.books.viewer.main.activity.MainActivityPaper"
@@ -139,7 +139,7 @@ class HookEntry : IYukiHookXposedInit {
                         homeButton.setOnClickListener {
                             Log.d(TAG, "Home button clicked!!!!")
 
-                            val intent = Intent();
+                            val intent = Intent()
                             intent.component = ComponentName(
                                 "cn.modificator.launcher",
                                 "cn.modificator.launcher.Launcher"
